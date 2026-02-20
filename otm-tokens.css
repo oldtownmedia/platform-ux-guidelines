@@ -1,0 +1,150 @@
+/**
+ * OTM Internal Tools - Design Tokens
+ * Import this file at the root of any OTM internal tool project.
+ *
+ * Usage:
+ *   @import url('./otm-tokens.css');
+ *   -- or --
+ *   <link rel="stylesheet" href="otm-tokens.css">
+ */
+
+/* ============================================================
+   FONTS
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES
+   ============================================================ */
+
+:root {
+  /* --- Brand Colors --- */
+  --color-navy: #1a365d;
+  --color-blue: #1e4d8c;
+  --color-blue-light: #2d6ab1;
+  --color-gold: #d4a029;
+  --color-gold-hover: #b8891f;
+  --color-teal: #1a8a7d;
+
+  /* --- Neutrals --- */
+  --color-white: #ffffff;
+  --color-gray-50: #f8fafc;
+  --color-gray-100: #f1f5f9;
+  --color-gray-200: #e2e8f0;
+  --color-gray-300: #cbd5e1;
+  --color-gray-500: #64748b;
+  --color-gray-700: #334155;
+  --color-gray-900: #0f172a;
+
+  /* --- Semantic --- */
+  --color-success: #16a34a;
+  --color-success-bg: #f0fdf4;
+  --color-warning: #d4a029;
+  --color-warning-text: #a16207;
+  --color-warning-bg: #fefce8;
+  --color-error: #dc2626;
+  --color-error-hover: #b91c1c;
+  --color-error-bg: #fef2f2;
+  --color-info: #2d6ab1;
+  --color-info-bg: #eff6ff;
+
+  /* --- Dark Surfaces --- */
+  --color-surface-dark: #0f2442;
+  --color-surface-navy: #1a365d;
+  --color-surface-mid: #1e4d8c;
+  --color-border-dark: #2d4a7c;
+  --color-text-dark-muted: #94a3b8;
+
+  /* --- Typography --- */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+
+  /* --- Spacing (base 4px) --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* --- Border Radius --- */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* --- Shadows --- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-xl: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  /* --- Transitions --- */
+  --transition-fast: 100ms ease;
+  --transition-base: 150ms ease;
+  --transition-slow: 300ms ease;
+
+  /* --- Layout --- */
+  --max-width-content: 1280px;
+  --max-width-form: 960px;
+  --max-width-prose: 680px;
+  --sidebar-width: 240px;
+  --sidebar-collapsed: 64px;
+  --nav-height: 56px;
+}
+
+/* ============================================================
+   BASE RESET + DEFAULTS
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-gray-700);
+  background: var(--color-gray-50);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+
+.text-navy { color: var(--color-navy); }
+.text-blue { color: var(--color-blue); }
+.text-gold { color: var(--color-gold); }
+.text-teal { color: var(--color-teal); }
+.text-muted { color: var(--color-gray-500); }
+.text-body { color: var(--color-gray-700); }
+.text-heading { color: var(--color-gray-900); }
+.text-white { color: var(--color-white); }
+.text-success { color: var(--color-success); }
+.text-error { color: var(--color-error); }
+
+.bg-navy { background-color: var(--color-navy); }
+.bg-blue { background-color: var(--color-blue); }
+.bg-gold { background-color: var(--color-gold); }
+.bg-teal { background-color: var(--color-teal); }
+.bg-white { background-color: var(--color-white); }
+.bg-gray-50 { background-color: var(--color-gray-50); }
+.bg-gray-100 { background-color: var(--color-gray-100); }
+
+.font-mono { font-family: var(--font-mono); }

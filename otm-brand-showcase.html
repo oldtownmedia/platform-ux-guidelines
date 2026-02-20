@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Guidelines Showcase | OTM Internal</title>
+  <link rel="stylesheet" href="otm-tokens.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231a365d'/><text x='16' y='22' font-family='Inter,Arial,sans-serif' font-size='16' font-weight='700' fill='%23ffffff' text-anchor='middle'>O</text></svg>">
+  <style>
+    /* ============================================================
+       SHOWCASE LAYOUT
+       ============================================================ */
+    .page-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* --- Sidebar --- */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--color-navy);
+      color: var(--color-white);
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      overflow-y: auto;
+      z-index: 100;
+    }
+    .sidebar-logo {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-6);
+      border-bottom: 1px solid var(--color-border-dark);
+    }
+    .sidebar-logo-mark {
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+      color: var(--color-white);
+    }
+    .sidebar-logo-sub {
+      margin-left: var(--space-2);
+      font-size: 12px;
+      color: var(--color-text-dark-muted);
+      font-weight: 400;
+    }
+    .sidebar-section-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-gray-500);
+      padding: var(--space-4) var(--space-6) var(--space-2);
+    }
+    .sidebar-nav {
+      list-style: none;
+    }
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-2) var(--space-6);
+      color: var(--color-text-dark-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      transition: all var(--transition-base);
+      border-left: 3px solid transparent;
+    }
+    .sidebar-nav a:hover {
+      background: var(--color-surface-mid);
+      color: var(--color-white);
+    }
+    .sidebar-nav a.active {
+      background: var(--color-surface-mid);
+      color: var(--color-white);
+      border-left-color: var(--color-gold);
+      font-weight: 500;
+    }
+    .sidebar-nav a svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    /* --- Main Area --- */
+    .main-area {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* --- Top Nav --- */
+    .top-nav {
+      background: var(--color-white);
+      border-bottom: 1px solid var(--color-gray-200);
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-8);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .top-nav-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-gray-900);
+    }
+    .top-nav-breadcrumb {
+      font-size: 13px;
+      color: var(--color-gray-500);
+      margin-left: var(--space-3);
+    }
+    .top-nav-actions {
+      margin-left: auto;
+      display: flex;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    /* --- Content --- */
+    .content {
+      max-width: var(--max-width-content);
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-8) var(--space-16);
+    }
+
+    /* ============================================================
+       SECTION SCAFFOLDING
+       ============================================================ */
+    .section {
+      margin-bottom: var(--space-16);
+    }
+    .section-overline {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-teal);
+      margin-bottom: var(--space-1);
+    }
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      color: var(--color-gray-900);
+      margin-bottom: var(--space-2);
+    }
+    .section-description {
+      font-size: 14px;
+      color: var(--color-gray-500);
+      max-width: var(--max-width-prose);
+      margin-bottom: var(--space-8);
+      line-height: 1.6;
+    }
+    .subsection {
+      margin-bottom: var(--space-10);
+    }
+    .subsection-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-gray-900);
+      margin-bottom: var(--space-4);
+    }
+
+    /* ============================================================
+       COLOR SWATCHES
+       ============================================================ */
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: var(--space-4);
+    }
+    .swatch {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-gray-200);
+      background: var(--color-white);
+      box-shadow: var(--shadow-sm);
+    }
+    .swatch-color {
+      height: 72px;
+    }
+    .swatch-info {
+      padding: var(--space-3);
+    }
+    .swatch-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-gray-900);
+      margin-bottom: 2px;
+    }
+    .swatch-hex {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-gray-500);
+    }
+    .swatch-var {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-gray-500);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* ============================================================
+       TYPOGRAPHY SPECIMENS
+       ============================================================ */
+    .type-specimen {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-8);
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--color-gray-200);
+    }
+    .type-specimen:last-child {
+      border-bottom: none;
+    }
+    .type-specimen-meta {
+      flex-shrink: 0;
+      width: 160px;
+    }
+    .type-specimen-meta dt {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 2px;
+    }
+    .type-specimen-meta dd {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-gray-700);
+    }
+    .type-specimen-sample {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ============================================================
+       SPACING VISUALIZATION
+       ============================================================ */
+    .spacing-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin-bottom: var(--space-3);
+    }
+    .spacing-label {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-gray-700);
+      width: 100px;
+      flex-shrink: 0;
+    }
+    .spacing-bar {
+      height: 20px;
+      background: var(--color-blue);
+      border-radius: var(--radius-sm);
+      opacity: 0.8;
+    }
+    .spacing-value {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-gray-500);
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       BUTTONS
+       ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      text-decoration: none;
+    }
+    .btn-sm { height: 36px; padding: 0 var(--space-4); font-size: 13px; }
+    .btn-md { height: 40px; padding: 0 var(--space-5); }
+    .btn-lg { height: 48px; padding: 0 var(--space-6); font-size: 15px; }
+
+    .btn-primary {
+      background: var(--color-blue);
+      color: var(--color-white);
+    }
+    .btn-primary:hover { background: var(--color-navy); }
+
+    .btn-secondary {
+      background: var(--color-white);
+      color: var(--color-blue);
+      border: 1px solid var(--color-gray-200);
+    }
+    .btn-secondary:hover {
+      background: var(--color-gray-100);
+      border-color: var(--color-gray-300);
+    }
+
+    .btn-accent {
+      background: var(--color-gold);
+      color: var(--color-white);
+    }
+    .btn-accent:hover { background: var(--color-gold-hover); }
+
+    .btn-destructive {
+      background: var(--color-error);
+      color: var(--color-white);
+    }
+    .btn-destructive:hover { background: var(--color-error-hover); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-gray-500);
+    }
+    .btn-ghost:hover {
+      background: var(--color-gray-100);
+      color: var(--color-gray-700);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    /* ============================================================
+       CARDS
+       ============================================================ */
+    .card {
+      background: var(--color-white);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-md);
+    }
+    .card-accent-teal { border-left: 4px solid var(--color-teal); }
+    .card-accent-gold { border-left: 4px solid var(--color-gold); }
+    .card-accent-blue { border-left: 4px solid var(--color-blue); }
+    .card-accent-red  { border-left: 4px solid var(--color-error); }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-gray-900);
+      margin-bottom: var(--space-2);
+    }
+    .card-body {
+      font-size: 14px;
+      color: var(--color-gray-700);
+      line-height: 1.6;
+    }
+    .card-footer {
+      margin-top: var(--space-4);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-gray-200);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-6);
+    }
+
+    /* Metric card */
+    .metric-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      box-shadow: var(--shadow-sm);
+    }
+    .metric-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-1);
+    }
+    .metric-value {
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      color: var(--color-gray-900);
+    }
+    .metric-change {
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: var(--space-1);
+    }
+    .metric-change.positive { color: var(--color-success); }
+    .metric-change.negative { color: var(--color-error); }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: var(--space-4);
+    }
+
+    /* ============================================================
+       FORM INPUTS
+       ============================================================ */
+    .form-group {
+      margin-bottom: var(--space-5);
+    }
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-gray-700);
+      margin-bottom: var(--space-1);
+    }
+    .form-hint {
+      font-size: 12px;
+      color: var(--color-gray-500);
+      margin-top: var(--space-1);
+    }
+    .form-input {
+      width: 100%;
+      height: 40px;
+      padding: 10px 12px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--color-gray-700);
+      background: var(--color-gray-100);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-base);
+      outline: none;
+    }
+    .form-input::placeholder {
+      color: var(--color-gray-500);
+    }
+    .form-input:focus {
+      border-color: var(--color-blue);
+      box-shadow: 0 0 0 3px rgba(30, 77, 140, 0.15);
+      background: var(--color-white);
+    }
+    .form-input.error {
+      border-color: var(--color-error);
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    }
+    .form-error-msg {
+      font-size: 12px;
+      color: var(--color-error);
+      margin-top: var(--space-1);
+    }
+
+    textarea.form-input {
+      height: auto;
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    select.form-input {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+
+    /* ============================================================
+       TABLE
+       ============================================================ */
+    .table-wrapper {
+      background: var(--color-white);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .table thead th {
+      background: var(--color-gray-100);
+      text-align: left;
+      padding: var(--space-3) var(--space-4);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--color-gray-700);
+      border-bottom: 1px solid var(--color-gray-200);
+    }
+    .table tbody td {
+      padding: var(--space-3) var(--space-4);
+      font-size: 14px;
+      color: var(--color-gray-700);
+      border-bottom: 1px solid var(--color-gray-200);
+    }
+    .table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .table tbody tr:nth-child(even) {
+      background: var(--color-gray-50);
+    }
+    .table tbody tr:hover {
+      background: var(--color-gray-100);
+    }
+
+    /* ============================================================
+       BADGES
+       ============================================================ */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .badge-success {
+      background: var(--color-success-bg);
+      color: var(--color-success);
+    }
+    .badge-success .badge-dot { background: var(--color-success); }
+
+    .badge-warning {
+      background: var(--color-warning-bg);
+      color: var(--color-warning-text);
+    }
+    .badge-warning .badge-dot { background: var(--color-gold); }
+
+    .badge-error {
+      background: var(--color-error-bg);
+      color: var(--color-error);
+    }
+    .badge-error .badge-dot { background: var(--color-error); }
+
+    .badge-info {
+      background: var(--color-info-bg);
+      color: var(--color-blue);
+    }
+    .badge-info .badge-dot { background: var(--color-blue-light); }
+
+    .badge-neutral {
+      background: var(--color-gray-100);
+      color: var(--color-gray-500);
+    }
+    .badge-neutral .badge-dot { background: var(--color-gray-500); }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    /* ============================================================
+       ALERTS
+       ============================================================ */
+    .alert {
+      padding: var(--space-4);
+      border-radius: var(--radius-lg);
+      border-left: 4px solid;
+      display: flex;
+      gap: var(--space-3);
+      align-items: flex-start;
+    }
+    .alert svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .alert-content {
+      flex: 1;
+    }
+    .alert-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .alert-body {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .alert-info {
+      background: var(--color-info-bg);
+      border-left-color: var(--color-info);
+      color: var(--color-blue);
+    }
+    .alert-success {
+      background: var(--color-success-bg);
+      border-left-color: var(--color-success);
+      color: var(--color-success);
+    }
+    .alert-warning {
+      background: var(--color-warning-bg);
+      border-left-color: var(--color-gold);
+      color: var(--color-warning-text);
+    }
+    .alert-error {
+      background: var(--color-error-bg);
+      border-left-color: var(--color-error);
+      color: var(--color-error);
+    }
+    .alerts-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    /* ============================================================
+       SHADOWS DEMO
+       ============================================================ */
+    .shadow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: var(--space-6);
+    }
+    .shadow-box {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6) var(--space-4);
+      text-align: center;
+    }
+    .shadow-box-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-gray-500);
+    }
+
+    /* ============================================================
+       RADIUS DEMO
+       ============================================================ */
+    .radius-grid {
+      display: flex;
+      gap: var(--space-6);
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+    .radius-box {
+      width: 80px;
+      height: 80px;
+      background: var(--color-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .radius-box-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-white);
+      font-weight: 500;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* ============================================================
+       LOGIN CARD DEMO
+       ============================================================ */
+    .login-demo {
+      background: var(--color-navy);
+      border-radius: var(--radius-xl);
+      padding: var(--space-12) var(--space-8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+    }
+    .login-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+      padding: var(--space-8);
+      width: 100%;
+      max-width: 400px;
+    }
+    .login-logo {
+      text-align: center;
+      margin-bottom: var(--space-6);
+    }
+    .login-logo-text {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-navy);
+      letter-spacing: -0.02em;
+    }
+    .login-card h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-gray-900);
+      text-align: center;
+      margin-bottom: var(--space-1);
+    }
+    .login-card .subtitle {
+      font-size: 14px;
+      color: var(--color-gray-500);
+      text-align: center;
+      margin-bottom: var(--space-6);
+    }
+
+    /* ============================================================
+       DARK SURFACE DEMO
+       ============================================================ */
+    .dark-demo {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .dark-demo-cell {
+      padding: var(--space-6);
+      text-align: center;
+    }
+    .dark-demo-cell .label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-white);
+      margin-bottom: var(--space-1);
+    }
+    .dark-demo-cell .hex {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-text-dark-muted);
+    }
+
+    /* ============================================================
+       CHART COLORS
+       ============================================================ */
+    .chart-bar-demo {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--space-3);
+      height: 200px;
+      padding: var(--space-4);
+      background: var(--color-white);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-lg);
+    }
+    .chart-bar {
+      flex: 1;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: var(--space-2);
+      min-width: 40px;
+    }
+    .chart-bar span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-white);
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      text-align: center;
+      padding: var(--space-8) var(--space-6);
+      color: var(--color-gray-500);
+      font-size: 13px;
+      border-top: 1px solid var(--color-gray-200);
+      margin-top: var(--space-16);
+    }
+
+    /* ============================================================
+       UTILITY
+       ============================================================ */
+    .mono { font-family: var(--font-mono); }
+    .code-inline {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: var(--color-gray-100);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      color: var(--color-blue);
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid var(--color-gray-200);
+      margin: var(--space-10) 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- ============================================================
+         SIDEBAR
+         ============================================================ -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <span class="sidebar-logo-mark">.OTM</span>
+        <span class="sidebar-logo-sub">Brand Guide</span>
+      </div>
+
+      <div class="sidebar-section-label">Foundation</div>
+      <ul class="sidebar-nav">
+        <li><a href="#colors" class="active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="4.5"/><circle cx="17.5" cy="14.5" r="4.5"/><circle cx="9.5" cy="14.5" r="4.5"/></svg>
+          Colors</a></li>
+        <li><a href="#typography">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+          Typography</a></li>
+        <li><a href="#spacing">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          Spacing and Layout</a></li>
+      </ul>
+
+      <div class="sidebar-section-label">Components</div>
+      <ul class="sidebar-nav">
+        <li><a href="#buttons">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="8" rx="3"/></svg>
+          Buttons</a></li>
+        <li><a href="#cards">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          Cards</a></li>
+        <li><a href="#forms">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+          Form Inputs</a></li>
+        <li><a href="#table">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+          Tables</a></li>
+        <li><a href="#badges">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg>
+          Badges</a></li>
+        <li><a href="#alerts">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Alerts</a></li>
+      </ul>
+
+      <div class="sidebar-section-label">Patterns</div>
+      <ul class="sidebar-nav">
+        <li><a href="#metrics">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Dashboard Metrics</a></li>
+        <li><a href="#login">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Login Pattern</a></li>
+        <li><a href="#charts">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Chart Colors</a></li>
+      </ul>
+    </aside>
+
+    <!-- ============================================================
+         MAIN AREA
+         ============================================================ -->
+    <div class="main-area">
+
+      <!-- Top Nav -->
+      <header class="top-nav">
+        <span class="top-nav-title">Brand Guidelines</span>
+        <span class="top-nav-breadcrumb">/ Component Showcase</span>
+        <div class="top-nav-actions">
+          <button class="btn btn-ghost btn-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Search
+          </button>
+          <button class="btn btn-primary btn-sm">Export PDF</button>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="content">
+
+        <!-- ==================== HERO ==================== -->
+        <div style="margin-bottom: var(--space-16);">
+          <div style="font-size: 30px; font-weight: 700; line-height: 1.2; letter-spacing: -0.025em; color: var(--color-gray-900); margin-bottom: var(--space-2);">
+            OTM Design System
+          </div>
+          <p style="font-size: 16px; color: var(--color-gray-500); max-width: var(--max-width-prose); line-height: 1.6; margin-bottom: var(--space-6);">
+            A living reference of the brand colors, typography, components, and patterns used across all OTM internal tools. Built with <code class="code-inline">otm-tokens.css</code> design tokens.
+          </p>
+          <div class="btn-row">
+            <a href="#colors" class="btn btn-primary btn-md">Explore Colors</a>
+            <a href="#buttons" class="btn btn-accent btn-md">View Components</a>
+            <a href="#login" class="btn btn-secondary btn-md">See Patterns</a>
+          </div>
+        </div>
+
+
+        <!-- ==================== COLORS ==================== -->
+        <section class="section" id="colors">
+          <div class="section-overline">Foundation</div>
+          <h1 class="section-title">Color System</h1>
+          <p class="section-description">
+            The OTM palette is built around a deep navy foundation with blue, gold, and teal accents. Colors are accessed through CSS custom properties for consistency.
+          </p>
+
+          <!-- Primary Palette -->
+          <div class="subsection">
+            <h3 class="subsection-title">Primary Palette</h3>
+            <div class="swatch-grid">
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-navy);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Navy</div>
+                  <div class="swatch-hex">#1a365d</div>
+                  <span class="swatch-var">--color-navy</span>
+                </div>
+              </div>
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-blue);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">OTM Blue</div>
+                  <div class="swatch-hex">#1e4d8c</div>
+                  <span class="swatch-var">--color-blue</span>
+                </div>
+              </div>
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-blue-light);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Slate Blue</div>
+                  <div class="swatch-hex">#2d6ab1</div>
+                  <span class="swatch-var">--color-blue-light</span>
+                </div>
+              </div>
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-gold);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">OTM Gold</div>
+                  <div class="swatch-hex">#d4a029</div>
+                  <span class="swatch-var">--color-gold</span>
+                </div>
+              </div>
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-teal);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Growth Teal</div>
+                  <div class="swatch-hex">#1a8a7d</div>
+                  <span class="swatch-var">--color-teal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Neutral Palette -->
+          <div class="subsection">
+            <h3 class="subsection-title">Neutral Palette</h3>
+            <div class="swatch-grid">
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-white); border-bottom: 1px solid var(--color-gray-200);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">White</div>
+                  <div class="swatch-hex">#ffffff</div>
+                  <span class="swatch-var">--color-white</span>
+                </div>
+              </div>
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-gray-50);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Gray 50</div>
+                  <div class="swatch-hex">#f8fafc</div>
+                  <span class="swatch-var">--color-gray-50</span>
+                </div>
+              </div>
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-gray-100);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Gray 100</div>
+                  <div class="swatch-hex">#f1f5f9</div>
+                  <span class="swatch-var">--color-gray-100</span>
+                </div>
+              </div>
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-gray-200);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Gray 200</div>
+                  <div class="swatch-hex">#e2e8f0</div>
+                  <span class="swatch-var">--color-gray-200</span>
+                </div>
+              </div>
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-gray-300);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Gray 300</div>
+                  <div class="swatch-hex">#cbd5e1</div>
+                  <span class="swatch-var">--color-gray-300</span>
+                </div>
+              </div>
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-gray-500);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Gray 500</div>
+                  <div class="swatch-hex">#64748b</div>
+                  <span class="swatch-var">--color-gray-500</span>
+                </div>
+              </div>
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-gray-700);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Gray 700</div>
+                  <div class="swatch-hex">#334155</div>
+                  <span class="swatch-var">--color-gray-700</span>
+                </div>
+              </div>
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-gray-900);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Gray 900</div>
+                  <div class="swatch-hex">#0f172a</div>
+                  <span class="swatch-var">--color-gray-900</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Semantic Colors -->
+          <div class="subsection">
+            <h3 class="subsection-title">Semantic Colors</h3>
+            <div class="swatch-grid">
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-success);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Success</div>
+                  <div class="swatch-hex">#16a34a</div>
+                  <span class="swatch-var">--color-success</span>
+                </div>
+              </div>
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-warning);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Warning</div>
+                  <div class="swatch-hex">#d4a029</div>
+                  <span class="swatch-var">--color-warning</span>
+                </div>
+              </div>
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-error);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Error</div>
+                  <div class="swatch-hex">#dc2626</div>
+                  <span class="swatch-var">--color-error</span>
+                </div>
+              </div>
+              <div class="swatch">
+                <div class="swatch-color" style="background: var(--color-info);"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Info</div>
+                  <div class="swatch-hex">#2d6ab1</div>
+                  <span class="swatch-var">--color-info</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dark Surfaces -->
+          <div class="subsection">
+            <h3 class="subsection-title">Dark Surface Palette</h3>
+            <div class="dark-demo">
+              <div class="dark-demo-cell" style="background: var(--color-surface-dark);">
+                <div class="label">Surface Dark</div>
+                <div class="hex">#0f2442</div>
+              </div>
+              <div class="dark-demo-cell" style="background: var(--color-surface-navy);">
+                <div class="label">Surface Navy</div>
+                <div class="hex">#1a365d</div>
+              </div>
+              <div class="dark-demo-cell" style="background: var(--color-surface-mid);">
+                <div class="label">Surface Mid</div>
+                <div class="hex">#1e4d8c</div>
+              </div>
+              <div class="dark-demo-cell" style="background: var(--color-border-dark);">
+                <div class="label">Border Dark</div>
+                <div class="hex">#2d4a7c</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ==================== TYPOGRAPHY ==================== -->
+        <section class="section" id="typography">
+          <div class="section-overline">Foundation</div>
+          <h1 class="section-title">Typography</h1>
+          <p class="section-description">
+            Inter is the primary typeface, chosen for its legibility in data-dense UIs. JetBrains Mono serves as the monospace companion for code and technical values.
+          </p>
+
+          <div class="subsection">
+            <div class="type-specimen">
+              <div class="type-specimen-meta">
+                <dt>Display</dt>
+                <dd>30px / 700</dd>
+              </div>
+              <div class="type-specimen-sample" style="font-size: 30px; font-weight: 700; line-height: 1.2; letter-spacing: -0.025em; color: var(--color-gray-900);">
+                Your Path to Growth
+              </div>
+            </div>
+
+            <div class="type-specimen">
+              <div class="type-specimen-meta">
+                <dt>H1</dt>
+                <dd>24px / 700</dd>
+              </div>
+              <div class="type-specimen-sample" style="font-size: 24px; font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; color: var(--color-gray-900);">
+                Dashboard Overview
+              </div>
+            </div>
+
+            <div class="type-specimen">
+              <div class="type-specimen-meta">
+                <dt>H2</dt>
+                <dd>20px / 600</dd>
+              </div>
+              <div class="type-specimen-sample" style="font-size: 20px; font-weight: 600; line-height: 1.35; letter-spacing: -0.015em; color: var(--color-gray-900);">
+                Client Performance Summary
+              </div>
+            </div>
+
+            <div class="type-specimen">
+              <div class="type-specimen-meta">
+                <dt>H3</dt>
+                <dd>16px / 600</dd>
+              </div>
+              <div class="type-specimen-sample" style="font-size: 16px; font-weight: 600; line-height: 1.4; letter-spacing: -0.01em; color: var(--color-gray-900);">
+                Revenue by Quarter
+              </div>
+            </div>
+
+            <div class="type-specimen">
+              <div class="type-specimen-meta">
+                <dt>Body</dt>
+                <dd>14px / 400</dd>
+              </div>
+              <div class="type-specimen-sample" style="font-size: 14px; font-weight: 400; line-height: 1.6; color: var(--color-gray-700);">
+                The quick brown fox jumps over the lazy dog. OTM's internal tools are designed to be professional, data-forward, and consistent across every application we build.
+              </div>
+            </div>
+
+            <div class="type-specimen">
+              <div class="type-specimen-meta">
+                <dt>Body Small</dt>
+                <dd>13px / 400</dd>
+              </div>
+              <div class="type-specimen-sample" style="font-size: 13px; font-weight: 400; line-height: 1.5; color: var(--color-gray-500);">
+                Secondary information, helper text, and supporting details appear at this size.
+              </div>
+            </div>
+
+            <div class="type-specimen">
+              <div class="type-specimen-meta">
+                <dt>Caption</dt>
+                <dd>12px / 500</dd>
+              </div>
+              <div class="type-specimen-sample" style="font-size: 12px; font-weight: 500; line-height: 1.4; letter-spacing: 0.01em; color: var(--color-gray-500);">
+                Labels, badges, timestamps, and other fine details
+              </div>
+            </div>
+
+            <div class="type-specimen">
+              <div class="type-specimen-meta">
+                <dt>Overline</dt>
+                <dd>11px / 600</dd>
+              </div>
+              <div class="type-specimen-sample" style="font-size: 11px; font-weight: 600; line-height: 1.3; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-gray-500);">
+                Quarterly Revenue Report
+              </div>
+            </div>
+
+            <div class="type-specimen">
+              <div class="type-specimen-meta">
+                <dt>Mono</dt>
+                <dd>13px / 400</dd>
+              </div>
+              <div class="type-specimen-sample" style="font-family: var(--font-mono); font-size: 13px; font-weight: 400; line-height: 1.5; color: var(--color-gray-700);">
+                const apiKey = "otm_sk_1a2b3c4d5e6f";
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">Accent Heading (Teal)</h3>
+            <p style="font-size: 20px; font-weight: 600; color: var(--color-teal); line-height: 1.35; margin-bottom: var(--space-2);">
+              Your Path to Growth Starts Here
+            </p>
+            <p style="font-size: 14px; color: var(--color-gray-500);">
+              Growth Teal is used for section subheadings when visual variety is needed on white backgrounds.
+            </p>
+          </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ==================== SPACING ==================== -->
+        <section class="section" id="spacing">
+          <div class="section-overline">Foundation</div>
+          <h1 class="section-title">Spacing, Radius, and Shadows</h1>
+          <p class="section-description">
+            A 4px base unit drives the entire spacing scale. Border radii are restrained, and shadows are subtle to maintain a professional, flat aesthetic.
+          </p>
+
+          <!-- Spacing Scale -->
+          <div class="subsection">
+            <h3 class="subsection-title">Spacing Scale</h3>
+            <div>
+              <div class="spacing-row">
+                <span class="spacing-label">--space-1</span>
+                <div class="spacing-bar" style="width: 4px;"></div>
+                <span class="spacing-value">4px</span>
+              </div>
+              <div class="spacing-row">
+                <span class="spacing-label">--space-2</span>
+                <div class="spacing-bar" style="width: 8px;"></div>
+                <span class="spacing-value">8px</span>
+              </div>
+              <div class="spacing-row">
+                <span class="spacing-label">--space-3</span>
+                <div class="spacing-bar" style="width: 12px;"></div>
+                <span class="spacing-value">12px</span>
+              </div>
+              <div class="spacing-row">
+                <span class="spacing-label">--space-4</span>
+                <div class="spacing-bar" style="width: 16px;"></div>
+                <span class="spacing-value">16px</span>
+              </div>
+              <div class="spacing-row">
+                <span class="spacing-label">--space-5</span>
+                <div class="spacing-bar" style="width: 20px;"></div>
+                <span class="spacing-value">20px</span>
+              </div>
+              <div class="spacing-row">
+                <span class="spacing-label">--space-6</span>
+                <div class="spacing-bar" style="width: 24px;"></div>
+                <span class="spacing-value">24px</span>
+              </div>
+              <div class="spacing-row">
+                <span class="spacing-label">--space-8</span>
+                <div class="spacing-bar" style="width: 32px;"></div>
+                <span class="spacing-value">32px</span>
+              </div>
+              <div class="spacing-row">
+                <span class="spacing-label">--space-10</span>
+                <div class="spacing-bar" style="width: 40px;"></div>
+                <span class="spacing-value">40px</span>
+              </div>
+              <div class="spacing-row">
+                <span class="spacing-label">--space-12</span>
+                <div class="spacing-bar" style="width: 48px;"></div>
+                <span class="spacing-value">48px</span>
+              </div>
+              <div class="spacing-row">
+                <span class="spacing-label">--space-16</span>
+                <div class="spacing-bar" style="width: 64px;"></div>
+                <span class="spacing-value">64px</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Border Radius -->
+          <div class="subsection">
+            <h3 class="subsection-title">Border Radius</h3>
+            <div class="radius-grid">
+              <div>
+                <div class="radius-box" style="border-radius: var(--radius-sm);">
+                  <span class="radius-box-label">sm<br>4px</span>
+                </div>
+              </div>
+              <div>
+                <div class="radius-box" style="border-radius: var(--radius-md);">
+                  <span class="radius-box-label">md<br>6px</span>
+                </div>
+              </div>
+              <div>
+                <div class="radius-box" style="border-radius: var(--radius-lg);">
+                  <span class="radius-box-label">lg<br>8px</span>
+                </div>
+              </div>
+              <div>
+                <div class="radius-box" style="border-radius: var(--radius-xl);">
+                  <span class="radius-box-label">xl<br>12px</span>
+                </div>
+              </div>
+              <div>
+                <div class="radius-box" style="border-radius: var(--radius-full);">
+                  <span class="radius-box-label">full<br>pill</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shadows -->
+          <div class="subsection">
+            <h3 class="subsection-title">Shadow Scale</h3>
+            <div class="shadow-grid">
+              <div class="shadow-box" style="box-shadow: var(--shadow-sm);">
+                <div class="shadow-box-label">--shadow-sm</div>
+              </div>
+              <div class="shadow-box" style="box-shadow: var(--shadow-md);">
+                <div class="shadow-box-label">--shadow-md</div>
+              </div>
+              <div class="shadow-box" style="box-shadow: var(--shadow-lg);">
+                <div class="shadow-box-label">--shadow-lg</div>
+              </div>
+              <div class="shadow-box" style="box-shadow: var(--shadow-xl);">
+                <div class="shadow-box-label">--shadow-xl</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ==================== BUTTONS ==================== -->
+        <section class="section" id="buttons">
+          <div class="section-overline">Components</div>
+          <h1 class="section-title">Buttons</h1>
+          <p class="section-description">
+            Five button variants cover all interaction needs. Gold is reserved for high-emphasis CTAs. Primary Blue handles most actions. Sizes come in small (36px), default (40px), and large (48px).
+          </p>
+
+          <div class="subsection">
+            <h3 class="subsection-title">Variants</h3>
+            <div class="btn-row" style="margin-bottom: var(--space-6);">
+              <button class="btn btn-primary btn-md">Primary</button>
+              <button class="btn btn-secondary btn-md">Secondary</button>
+              <button class="btn btn-accent btn-md">Accent CTA</button>
+              <button class="btn btn-destructive btn-md">Destructive</button>
+              <button class="btn btn-ghost btn-md">Ghost</button>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">Sizes</h3>
+            <div class="btn-row" style="margin-bottom: var(--space-6);">
+              <button class="btn btn-primary btn-sm">Small (36px)</button>
+              <button class="btn btn-primary btn-md">Default (40px)</button>
+              <button class="btn btn-primary btn-lg">Large (48px)</button>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">With Icons</h3>
+            <div class="btn-row">
+              <button class="btn btn-primary btn-md">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Create Client
+              </button>
+              <button class="btn btn-accent btn-md">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download Report
+              </button>
+              <button class="btn btn-secondary btn-md">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                Back
+              </button>
+              <button class="btn btn-destructive btn-sm">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                Delete
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ==================== CARDS ==================== -->
+        <section class="section" id="cards">
+          <div class="section-overline">Components</div>
+          <h1 class="section-title">Cards</h1>
+          <p class="section-description">
+            Cards are the primary container for grouping related content. They use subtle borders and shadows, with an optional colored left border to indicate status or category.
+          </p>
+
+          <div class="subsection">
+            <h3 class="subsection-title">Standard Card</h3>
+            <div class="card" style="max-width: 480px;">
+              <div class="card-title">Client Health Summary</div>
+              <div class="card-body">
+                This card shows the default styling with white background, light border, and medium shadow. Content should be clear and scannable.
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-primary btn-sm">View Details</button>
+                <button class="btn btn-ghost btn-sm">Dismiss</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">Cards with Accent Borders</h3>
+            <div class="card-grid">
+              <div class="card card-accent-teal">
+                <div class="card-title">Growth Metric</div>
+                <div class="card-body">
+                  Teal left border indicates active, positive, or growth-related content.
+                </div>
+              </div>
+              <div class="card card-accent-gold">
+                <div class="card-title">Pending Review</div>
+                <div class="card-body">
+                  Gold left border signals items needing attention or in a pending state.
+                </div>
+              </div>
+              <div class="card card-accent-blue">
+                <div class="card-title">System Information</div>
+                <div class="card-body">
+                  Blue left border is used for purely informational notices and updates.
+                </div>
+              </div>
+              <div class="card card-accent-red">
+                <div class="card-title">Critical Issue</div>
+                <div class="card-body">
+                  Red left border highlights errors, failures, or critical items requiring immediate action.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ==================== FORMS ==================== -->
+        <section class="section" id="forms">
+          <div class="section-overline">Components</div>
+          <h1 class="section-title">Form Inputs</h1>
+          <p class="section-description">
+            Inputs use a soft gray background that transitions to white on focus. Focus rings use the OTM Blue with a subtle spread. Error states use red borders with a light red glow.
+          </p>
+
+          <div class="card" style="max-width: var(--max-width-form);">
+            <div style="font-size: 20px; font-weight: 600; color: var(--color-gray-900); margin-bottom: var(--space-6);">Create New Client</div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">First Name</label>
+                <input type="text" class="form-input" placeholder="John" value="Miles">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Last Name</label>
+                <input type="text" class="form-input" placeholder="Smith" value="Richardson">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" placeholder="john@company.com" value="miles@meetotm.com">
+              <div class="form-hint">We will use this for all client communications.</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Company Name</label>
+              <input type="text" class="form-input error" value="">
+              <div class="form-error-msg">Company name is required.</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Industry</label>
+              <select class="form-input">
+                <option>Select an industry</option>
+                <option>Technology</option>
+                <option>Healthcare</option>
+                <option selected>Professional Services</option>
+                <option>Manufacturing</option>
+                <option>Financial Services</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Notes</label>
+              <textarea class="form-input" placeholder="Add any relevant context about this client..."></textarea>
+            </div>
+
+            <div class="btn-row" style="margin-top: var(--space-6);">
+              <button class="btn btn-accent btn-md">Create Client</button>
+              <button class="btn btn-secondary btn-md">Cancel</button>
+            </div>
+          </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ==================== TABLE ==================== -->
+        <section class="section" id="table">
+          <div class="section-overline">Components</div>
+          <h1 class="section-title">Tables</h1>
+          <p class="section-description">
+            Data tables use clean horizontal borders, uppercase header labels, and alternating row backgrounds. No vertical gridlines for a modern, scannable look.
+          </p>
+
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Industry</th>
+                  <th>MRR</th>
+                  <th>Status</th>
+                  <th>Last Activity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight: 500; color: var(--color-gray-900);">Acme Corporation</td>
+                  <td>Technology</td>
+                  <td style="font-family: var(--font-mono);">$12,400</td>
+                  <td><span class="badge badge-success"><span class="badge-dot"></span>Active</span></td>
+                  <td style="color: var(--color-gray-500);">2 hours ago</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 500; color: var(--color-gray-900);">Globex Industries</td>
+                  <td>Manufacturing</td>
+                  <td style="font-family: var(--font-mono);">$8,750</td>
+                  <td><span class="badge badge-success"><span class="badge-dot"></span>Active</span></td>
+                  <td style="color: var(--color-gray-500);">1 day ago</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 500; color: var(--color-gray-900);">Initech Solutions</td>
+                  <td>Professional Services</td>
+                  <td style="font-family: var(--font-mono);">$5,200</td>
+                  <td><span class="badge badge-warning"><span class="badge-dot"></span>Pending</span></td>
+                  <td style="color: var(--color-gray-500);">3 days ago</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 500; color: var(--color-gray-900);">Vehement Capital</td>
+                  <td>Financial Services</td>
+                  <td style="font-family: var(--font-mono);">$22,100</td>
+                  <td><span class="badge badge-success"><span class="badge-dot"></span>Active</span></td>
+                  <td style="color: var(--color-gray-500);">5 hours ago</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 500; color: var(--color-gray-900);">Soylent Corp</td>
+                  <td>Healthcare</td>
+                  <td style="font-family: var(--font-mono);">$3,900</td>
+                  <td><span class="badge badge-error"><span class="badge-dot"></span>Churned</span></td>
+                  <td style="color: var(--color-gray-500);">2 weeks ago</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 500; color: var(--color-gray-900);">Umbrella Group</td>
+                  <td>Technology</td>
+                  <td style="font-family: var(--font-mono);">$15,600</td>
+                  <td><span class="badge badge-info"><span class="badge-dot"></span>Onboarding</span></td>
+                  <td style="color: var(--color-gray-500);">12 hours ago</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ==================== BADGES ==================== -->
+        <section class="section" id="badges">
+          <div class="section-overline">Components</div>
+          <h1 class="section-title">Badges and Status Indicators</h1>
+          <p class="section-description">
+            Pill-shaped badges with a colored dot for quick visual scanning. Five semantic variants cover all common statuses.
+          </p>
+
+          <div class="badge-row" style="margin-bottom: var(--space-6);">
+            <span class="badge badge-success"><span class="badge-dot"></span>Active</span>
+            <span class="badge badge-success"><span class="badge-dot"></span>Connected</span>
+            <span class="badge badge-warning"><span class="badge-dot"></span>Pending</span>
+            <span class="badge badge-warning"><span class="badge-dot"></span>Review Needed</span>
+            <span class="badge badge-error"><span class="badge-dot"></span>Failed</span>
+            <span class="badge badge-error"><span class="badge-dot"></span>Disconnected</span>
+            <span class="badge badge-info"><span class="badge-dot"></span>In Progress</span>
+            <span class="badge badge-info"><span class="badge-dot"></span>Syncing</span>
+            <span class="badge badge-neutral"><span class="badge-dot"></span>Inactive</span>
+            <span class="badge badge-neutral"><span class="badge-dot"></span>Draft</span>
+          </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ==================== ALERTS ==================== -->
+        <section class="section" id="alerts">
+          <div class="section-overline">Components</div>
+          <h1 class="section-title">Alerts</h1>
+          <p class="section-description">
+            Alerts use colored left borders and tinted backgrounds matching the semantic color system.
+          </p>
+
+          <div class="alerts-stack" style="max-width: 640px;">
+            <div class="alert alert-info">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <div class="alert-content">
+                <div class="alert-title">New Integration Available</div>
+                <div class="alert-body">HubSpot sync is now available for all client accounts. Enable it in Settings.</div>
+              </div>
+            </div>
+
+            <div class="alert alert-success">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <div class="alert-content">
+                <div class="alert-title">Report Generated</div>
+                <div class="alert-body">The Q4 revenue report has been generated and is ready for download.</div>
+              </div>
+            </div>
+
+            <div class="alert alert-warning">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <div class="alert-content">
+                <div class="alert-title">API Rate Limit Warning</div>
+                <div class="alert-body">You have used 85% of your monthly API quota. Consider upgrading your plan.</div>
+              </div>
+            </div>
+
+            <div class="alert alert-error">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              <div class="alert-content">
+                <div class="alert-title">Sync Failed</div>
+                <div class="alert-body">Unable to connect to the CRM. Please check your credentials and try again.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ==================== METRICS ==================== -->
+        <section class="section" id="metrics">
+          <div class="section-overline">Patterns</div>
+          <h1 class="section-title">Dashboard Metrics</h1>
+          <p class="section-description">
+            Metric cards use the Display type size for values, Overline styling for labels, and colored change indicators.
+          </p>
+
+          <div class="metric-grid">
+            <div class="metric-card">
+              <div class="metric-label">Total Revenue</div>
+              <div class="metric-value">$284,500</div>
+              <div class="metric-change positive">+12.3% vs last quarter</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Active Clients</div>
+              <div class="metric-value">47</div>
+              <div class="metric-change positive">+5 this month</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Avg. Engagement</div>
+              <div class="metric-value">8.4</div>
+              <div class="metric-change negative">-0.3 vs last month</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Churn Rate</div>
+              <div class="metric-value">2.1%</div>
+              <div class="metric-change positive">-0.5% improved</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Pipeline Value</div>
+              <div class="metric-value">$1.2M</div>
+              <div class="metric-change positive">+18.7% growth</div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ==================== LOGIN ==================== -->
+        <section class="section" id="login">
+          <div class="section-overline">Patterns</div>
+          <h1 class="section-title">Login / Auth Gate</h1>
+          <p class="section-description">
+            Password-protected tools use a centered white card on a navy background. The gold accent button is used for the sign-in CTA.
+          </p>
+
+          <div class="login-demo">
+            <div class="login-card">
+              <div class="login-logo">
+                <span class="login-logo-text">.OTM</span>
+              </div>
+              <h2>Welcome Back</h2>
+              <p class="subtitle">Sign in to access this internal tool.</p>
+
+              <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" placeholder="you@meetotm.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-input" placeholder="Enter your password">
+              </div>
+              <button class="btn btn-accent btn-lg" style="width: 100%; margin-top: var(--space-2);">Sign In</button>
+              <p style="text-align: center; font-size: 12px; color: var(--color-gray-500); margin-top: var(--space-4);">OTM Internal Tool. Authorized users only.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ==================== CHART COLORS ==================== -->
+        <section class="section" id="charts">
+          <div class="section-overline">Patterns</div>
+          <h1 class="section-title">Chart Color Palette</h1>
+          <p class="section-description">
+            Multi-series charts should use colors in this specific order for consistency across all OTM dashboards. Background is always white, with dashed gray gridlines.
+          </p>
+
+          <div class="chart-bar-demo">
+            <div class="chart-bar" style="background: #1e4d8c; height: 85%;"><span>1</span></div>
+            <div class="chart-bar" style="background: #1a8a7d; height: 70%;"><span>2</span></div>
+            <div class="chart-bar" style="background: #d4a029; height: 55%;"><span>3</span></div>
+            <div class="chart-bar" style="background: #2d6ab1; height: 90%;"><span>4</span></div>
+            <div class="chart-bar" style="background: #16a34a; height: 45%;"><span>5</span></div>
+            <div class="chart-bar" style="background: #dc2626; height: 30%;"><span>6</span></div>
+            <div class="chart-bar" style="background: #64748b; height: 60%;"><span>7</span></div>
+            <div class="chart-bar" style="background: #0f2442; height: 75%;"><span>8</span></div>
+          </div>
+
+          <div style="margin-top: var(--space-4); display: flex; flex-wrap: wrap; gap: var(--space-4);">
+            <div style="display: flex; align-items: center; gap: var(--space-2);">
+              <div style="width: 12px; height: 12px; border-radius: 2px; background: #1e4d8c;"></div>
+              <span style="font-size: 12px; color: var(--color-gray-700);">OTM Blue</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-2);">
+              <div style="width: 12px; height: 12px; border-radius: 2px; background: #1a8a7d;"></div>
+              <span style="font-size: 12px; color: var(--color-gray-700);">Growth Teal</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-2);">
+              <div style="width: 12px; height: 12px; border-radius: 2px; background: #d4a029;"></div>
+              <span style="font-size: 12px; color: var(--color-gray-700);">OTM Gold</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-2);">
+              <div style="width: 12px; height: 12px; border-radius: 2px; background: #2d6ab1;"></div>
+              <span style="font-size: 12px; color: var(--color-gray-700);">Slate Blue</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-2);">
+              <div style="width: 12px; height: 12px; border-radius: 2px; background: #16a34a;"></div>
+              <span style="font-size: 12px; color: var(--color-gray-700);">Success Green</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-2);">
+              <div style="width: 12px; height: 12px; border-radius: 2px; background: #dc2626;"></div>
+              <span style="font-size: 12px; color: var(--color-gray-700);">Error Red</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-2);">
+              <div style="width: 12px; height: 12px; border-radius: 2px; background: #64748b;"></div>
+              <span style="font-size: 12px; color: var(--color-gray-700);">Gray 500</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--space-2);">
+              <div style="width: 12px; height: 12px; border-radius: 2px; background: #0f2442;"></div>
+              <span style="font-size: 12px; color: var(--color-gray-700);">Surface Dark</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== FOOTER ==================== -->
+        <footer class="footer">
+          OTM Internal Tool &middot; Brand Guidelines v1.0 &middot; February 2026
+        </footer>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
