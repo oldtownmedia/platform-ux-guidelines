@@ -1,9 +1,10 @@
 # OTM Internal Tools Brand Guidelines
 
-> **Version:** 1.0
-> **Last Updated:** February 2026
+> **Version:** 1.1
+> **Last Updated:** May 2026
 > **Purpose:** Standardize the look and feel of all OTM internal tools, dashboards, and applications built in Cursor and deployed to Railway.
 > **Audience:** Developers, AI coding assistants (Cursor, Claude), and anyone building internal OTM tooling.
+> **Files:** `otm-tokens.css` (variables + type scale), `otm-components.css` (the canonical app shell + components), `otm-brand-showcase.html` (live reference).
 
 ---
 
@@ -115,6 +116,8 @@ These are the core brand colors derived from meetotm.com.
 | **Overline** | 11px / 0.6875rem | 600 | 1.3 | 0.06em | Uppercase section labels, stat labels |
 | **Mono** | 13px / 0.8125rem | 400 | 1.5 | 0 | Code, IDs, technical values |
 
+This scale is available as CSS variables (`--text-display-size`, `--text-h1-weight`, etc.) and ready-made utility classes (`.text-display`, `.text-h1`, `.text-h2`, `.text-h3`, `.text-overline`) in `otm-tokens.css`. Use those instead of hardcoding sizes so tools stay consistent.
+
 ### 3.3 Rules
 
 - **Minimum readable size:** 12px. Never go smaller.
@@ -186,6 +189,8 @@ These are the core brand colors derived from meetotm.com.
 | **Destructive Hover** | `#b91c1c` | `#ffffff` | none | |
 | **Ghost** | transparent | `#64748b` | none | Tertiary actions, icon buttons |
 | **Ghost Hover** | `#f1f5f9` | `#334155` | none | |
+
+> **There is no teal button.** Teal (`#1a8a7d`) is reserved for success states, growth metrics, and section headings, never as a button fill. Primary actions are **OTM Blue**; the single highest-emphasis CTA on a screen may be **Gold**. If you see a teal action button in a live tool (e.g. a "New Client" button), that is a deviation to correct, not a pattern to copy.
 
 **Button Specs:**
 - Height: 36px (small), 40px (default), 48px (large)
@@ -331,15 +336,61 @@ Shadow:        --shadow-sm
 
 ### 5.5 Navigation (Sidebar)
 
+The left sidebar is the **primary navigation** for OTM tools (see §8.4). It is a full-height navy column with four stacked regions, top to bottom: **logo + product subtitle**, **scrollable nav**, and a **pinned user/account block**. All of this ships in `otm-components.css` (`.sidebar`, `.nav-item`, `.nav-group`, `.sidebar-user`); the spec below documents the intent.
+
+**Shell:**
 ```
 Background:    #1a365d (Navy)
 Width:         240px (expanded) / 64px (collapsed)
-Logo area:     64px height, centered .OTM logo in white
-Active item:   Background #1e4d8c, left border 3px #d4a029
-Hover:         Background #1e4d8c
 Text:          #ffffff (active), #94a3b8 (inactive)
 Icon size:     20px
-Section label: 11px, uppercase, #64748b, weight 600, letter-spacing 0.06em
+Layout:        flex column, full viewport height, sticky
+```
+
+**Logo area (top, 56px):**
+```
+.OTM logo:     white, with the leading "." in gold (#d4a029)
+Subtitle:      product / instance name below the logo, 12px, #94a3b8
+               (e.g. ".OTM" over "Venn Intelligence")
+Border bottom: 1px #2d4a7c
+```
+
+**Section label (non-interactive group heading):**
+```
+11px, uppercase, #94a3b8, weight 600, letter-spacing 0.06em
+```
+
+**Nav item:**
+```
+Padding:       8px 12px, gap 12px (icon to label), radius 6px
+Inactive:      text #94a3b8
+Hover:         background #1e4d8c, text #ffffff
+Active:        background #1e4d8c, text #ffffff, left border 3px #d4a029
+Markup:        use aria-current="page" on the active item
+```
+
+**Collapsible nav group (a parent that expands to nested items, e.g. "Settings"):**
+```
+Toggle row:    same styling as a nav item, plus a trailing chevron
+               (16px) on the right that rotates 180deg when open
+State:         button with aria-expanded="true|false" + aria-controls
+Sub-items:     indented (padding-left 32px), 13px, #94a3b8
+               hover background #1e4d8c; active sub-item is white + weight 500
+Collapsed:     sub-nav hidden when the toggle is aria-expanded="false"
+```
+
+**User / account block (pinned to the sidebar bottom):**
+
+This block is part of the standard shell and is the single most commonly missed element when tools are rebuilt. Always include it on authenticated tools.
+```
+Border top:    1px #2d4a7c
+Avatar:        32px, border-radius full (Google/OAuth photo or initials fallback)
+Name:          13px, weight 600, #ffffff, truncate with ellipsis
+Email:         12px, #94a3b8, truncate with ellipsis
+Sign out:      full-width row below the identity, 13px #94a3b8 with a 16px
+               logout icon; hover background #1e4d8c, text #ffffff
+A11y:          render "Sign out" as a <button> (or a real link to the logout
+               route), never a bare div; it must be keyboard-focusable
 ```
 
 ### 5.6 Badges / Status Indicators
@@ -355,6 +406,20 @@ Section label: 11px, uppercase, #64748b, weight 600, letter-spacing 0.06em
 **Badge specs:** 12px font, weight 500, padding 2px 8px, border-radius 9999px, inline-flex with center alignment.
 
 **Badge dot:** 6px width/height, border-radius 50%, 6px gap between dot and text.
+
+**Category badge** (`.badge-category`): labels what product or tool a record belongs to (e.g. "Site Intelligence" on a project card). Distinguished from status badges by **square-ish corners** (`--radius-sm`) instead of the pill shape:
+```
+Background:    #e6f4f1 (teal tint)
+Text:          #1a8a7d (Growth Teal), weight 600
+Radius:        4px (--radius-sm)
+```
+
+**Integration status chip** (`.chip-integration`): a compact chip for connected data sources (e.g. `GSC`, `GA4`). It encodes connection state via color:
+```
+Connected:     background #f0fdf4, text #16a34a
+Not connected: background #fef2f2, text #dc2626
+Specs:         11px, weight 600, padding 2px 8px, radius 4px, letter-spacing 0.02em
+```
 
 ### 5.7 Charts and Data Visualization
 
@@ -441,6 +506,12 @@ Margin top:    4px (--space-1)
 Positive:      #16a34a (Success)
 Negative:      #dc2626 (Error)
 ```
+
+**Attention metric value** (`.metric-value.is-attention`): when a metric represents something the user must act on (e.g. "Needs Attention: 21" — missing connections or stale data), render the value itself in warning gold rather than the default heading color:
+```
+Color:         #a16207 (Warning Text)
+```
+Use sparingly: at most one attention metric per metric row, reserved for genuinely actionable counts.
 
 **Metric grid layout:** Use CSS grid with `repeat(auto-fill, minmax(180px, 1fr))` and 16px gap.
 
@@ -559,11 +630,36 @@ module.exports = {
           dark: '#0f2442',
           navy: '#1a365d',
           mid: '#1e4d8c',
+          border: '#2d4a7c',
         },
+        gray: {
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
+          300: '#cbd5e1',
+          500: '#64748b',
+          700: '#334155',
+          900: '#0f172a',
+        },
+        success: '#16a34a',
+        warning: '#d4a029',
+        'warning-text': '#a16207',
+        error: '#dc2626',
+        info: '#2d6ab1',
       },
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', 'monospace'],
+      },
+      fontSize: {
+        display: ['30px', { lineHeight: '1.2', letterSpacing: '-0.025em', fontWeight: '700' }],
+        h1: ['24px', { lineHeight: '1.3', letterSpacing: '-0.02em', fontWeight: '700' }],
+        h2: ['20px', { lineHeight: '1.35', letterSpacing: '-0.015em', fontWeight: '600' }],
+        h3: ['16px', { lineHeight: '1.4', letterSpacing: '-0.01em', fontWeight: '600' }],
+        body: ['14px', { lineHeight: '1.6' }],
+        'body-sm': ['13px', { lineHeight: '1.5' }],
+        caption: ['12px', { lineHeight: '1.4', letterSpacing: '0.01em' }],
+        overline: ['11px', { lineHeight: '1.3', letterSpacing: '0.06em', fontWeight: '600' }],
       },
       borderRadius: {
         sm: '4px',
@@ -627,13 +723,16 @@ Every app should expose `GET /health` returning:
 
 ### 8.4 Standard Page Structure
 
-Every internal tool should include:
+**The default OTM shell is sidebar-first.** Most internal tools are multi-page dashboards, so the standard layout is a full-height left sidebar plus a content header bar, not a top nav bar. The complete shell ships in `otm-components.css` (`.app-shell`, `.sidebar`, `.content-header`, `.app-footer`).
 
-1. **Top nav bar** (56px height, navy background, white `.OTM` logo left-aligned, tool name next to logo)
-2. **Sidebar** (if multi-page) or **tab navigation** (if single-page with sections)
-3. **Content header bar** (optional, for tools with sidebar navigation)
-4. **Main content area** (white or gray-50 background)
-5. **Footer** (minimal: "OTM Internal Tool · v1.0.0")
+A standard multi-page tool includes:
+
+1. **Left sidebar** (navy, 240px) containing, top to bottom: the `.OTM` logo + product subtitle, the nav (with section labels and collapsible groups), and the pinned **user/account block with Sign out** (see §5.5). This is the primary navigation.
+2. **Content header bar** (56px, white) at the top of the content column showing the current page title / breadcrumb and any page-level actions.
+3. **Main content area** (gray-50 background, max-width 1280px).
+4. **Footer** (minimal: "OTM Internal Tools · 1.0.0").
+
+**Single-page / utility tools** (no multi-page nav) may instead use a **top nav bar** (56px height, navy background, white `.OTM` logo left-aligned, tool name next to logo) with no sidebar. Use the sidebar shell whenever the tool has more than one view.
 
 **Content header bar (when sidebar is present):**
 ```
@@ -656,7 +755,7 @@ Padding:       32px 24px (--space-8 --space-6)
 Color:         #64748b (Gray 500)
 Font size:     13px
 Border top:    1px solid #e2e8f0
-Format:        "OTM Internal Tool · v1.0.0"
+Format:        "OTM Internal Tools · {version}"   e.g. "OTM Internal Tools · 1.0.0"
 ```
 
 ### 8.5 Login / Auth Gate Pattern
@@ -711,14 +810,21 @@ When using this file as context in Cursor or with Claude for code generation, in
 You are building an internal tool for OTM (Old Town Media). Follow the brand
 guidelines in OTM-BRAND-GUIDELINES.md. Key rules:
 
+- Import otm-tokens.css and otm-components.css; use those classes/variables
+  instead of hardcoding colors, type sizes, or rebuilding the shell
 - Use the OTM color palette (navy, blue, gold, teal as defined in the guide)
-- Use Inter font family with the defined type scale
-- Use the CSS variables defined in Section 6
-- Follow the component patterns in Section 5
-- Dark sidebar navigation with navy background
-- Gold accent for primary CTAs
+- Use Inter font family with the defined type scale (--text-* tokens)
+- Default shell is the left navy SIDEBAR + content header bar (see §5.5, §8.4),
+  not a top nav bar
+- The sidebar MUST include: .OTM logo + product subtitle at top, and a pinned
+  user/account block at the bottom (avatar, name, email, Sign out button).
+  Collapsible nav groups use a <button aria-expanded> toggle with nested items.
+- Primary buttons are blue; the single highest-emphasis CTA may be gold.
+  There is NO teal button (teal is for success/growth/headings only).
 - Clean, data-forward design with generous whitespace
 - Cards with subtle borders and shadows, optional colored left borders
+- Keyboard-focusable controls with visible focus rings; aria-current on the
+  active nav item; real <button>/<a> for Sign out (never a bare div)
 - Never use em dashes in UI copy
 - Deploy-ready for Railway with health check endpoint
 ```
@@ -818,3 +924,28 @@ guidelines in OTM-BRAND-GUIDELINES.md. Key rules:
 - Use em dashes in any UI copy
 - Add animations beyond subtle hover transitions (150ms)
 - Use more than 3 colors from the chart palette in a single visualization unless absolutely necessary
+- Use teal (or any non-blue/gold color) as a button fill
+- Ship an authenticated tool without the sidebar user/account + Sign out block
+
+### Common deviations to watch for
+
+These are the elements most often missed or done off-brand when tools are rebuilt. Check them on every tool:
+
+1. **Sidebar user/account block + Sign out** is present and styled per §5.5 (avatar, name, email, focusable Sign out).
+2. **Collapsible nav groups** use a real `<button aria-expanded>` toggle, with a chevron that rotates and nested sub-items that hide when collapsed.
+3. **Logo + product subtitle** at the top of the sidebar (`.OTM` over the instance name, with the leading dot in gold).
+4. **Button colors** are blue/gold only. No teal buttons.
+5. **Footer string** reads "OTM Internal Tools · {version}".
+
+---
+
+## 13. Accessibility
+
+Accessibility is part of the brand, not an add-on. Minimum bar for every tool:
+
+- **Contrast:** Maintain at least 4.5:1 for body text and 3:1 for large text / UI borders. On the navy sidebar, use `#ffffff` for active text and `#94a3b8` only for secondary labels (it clears 4.5:1 on `#1a365d`).
+- **Keyboard:** Every interactive element (nav items, nav-group toggles, Sign out, buttons, links, inputs) must be reachable and operable by keyboard and show a visible focus ring. `otm-tokens.css` provides a default `:focus-visible` outline; do not remove it.
+- **Semantics:** Use real elements: `<button>` for actions, `<a href>` for navigation, `<nav>` for the sidebar. Mark the active nav item with `aria-current="page"`. Collapsible groups use `aria-expanded` + `aria-controls`.
+- **Images:** Avatars and icons need `alt` text or `aria-label` (e.g. the Sign out icon button).
+- **Motion:** Respect `prefers-reduced-motion`; `otm-tokens.css` already neutralizes transitions/animations under that media query.
+- **Targets:** Interactive rows/buttons should present at least a ~36px tall hit area.

@@ -26,6 +26,8 @@
       bottom: 0;
       overflow-y: auto;
       z-index: 100;
+      display: flex;
+      flex-direction: column;
     }
     .sidebar-logo {
       height: 64px;
@@ -35,8 +37,8 @@
       border-bottom: 1px solid var(--color-border-dark);
     }
     .sidebar-logo-mark {
-      font-family: var(--font-display);
-      font-weight: 900;
+      font-family: var(--font-sans);
+      font-weight: 700;
       font-size: 22px;
       letter-spacing: -0.02em;
       color: var(--color-white);
@@ -88,6 +90,68 @@
       width: 20px;
       height: 20px;
       flex-shrink: 0;
+    }
+
+    /* --- Sidebar user / account block (pinned to bottom) --- */
+    .sidebar-user {
+      margin-top: auto;
+      border-top: 1px solid var(--color-border-dark);
+      padding: var(--space-4) var(--space-4);
+    }
+    .sidebar-user-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: 0 var(--space-2) var(--space-3);
+    }
+    .sidebar-user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-full);
+      background: var(--color-surface-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-white);
+      flex-shrink: 0;
+    }
+    .sidebar-user-info { min-width: 0; }
+    .sidebar-user-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sidebar-user-email {
+      font-size: 12px;
+      color: var(--color-text-dark-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sidebar-signout {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      width: 100%;
+      padding: var(--space-2);
+      border-radius: var(--radius-md);
+      background: transparent;
+      border: none;
+      color: var(--color-text-dark-muted);
+      font-family: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+    .sidebar-signout svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .sidebar-signout:hover {
+      background: var(--color-surface-mid);
+      color: var(--color-white);
     }
 
     /* --- Main Area --- */
@@ -406,6 +470,7 @@
       letter-spacing: -0.025em;
       color: var(--color-gray-900);
     }
+    .metric-value.attention { color: var(--color-warning-text); }
     .metric-change {
       font-size: 13px;
       font-weight: 500;
@@ -584,6 +649,27 @@
       gap: var(--space-3);
       align-items: center;
     }
+    .badge-category {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px var(--space-2);
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      background: #e6f4f1;
+      color: var(--color-teal);
+    }
+    .chip-integration {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px var(--space-2);
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      letter-spacing: 0.02em;
+    }
+    .chip-integration.is-connected { background: var(--color-success-bg); color: var(--color-success); }
+    .chip-integration.is-disconnected { background: var(--color-error-bg); color: var(--color-error); }
 
     /* ============================================================
        ALERTS
@@ -711,9 +797,9 @@
       margin-bottom: var(--space-6);
     }
     .login-logo-text {
-      font-family: var(--font-display);
+      font-family: var(--font-sans);
       font-size: 28px;
-      font-weight: 900;
+      font-weight: 700;
       color: #3e5361;
       letter-spacing: -0.02em;
       text-transform: lowercase;
@@ -878,7 +964,25 @@
         <li><a href="#charts">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           Chart Colors</a></li>
+        <li><a href="#shell">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+          App Shell &amp; Nav</a></li>
       </ul>
+
+      <!-- User / account block (pinned to sidebar bottom) -->
+      <div class="sidebar-user">
+        <div class="sidebar-user-row">
+          <div class="sidebar-user-avatar">MK</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Miles Kailburn</div>
+            <div class="sidebar-user-email">miles@meetotm.com</div>
+          </div>
+        </div>
+        <button type="button" class="sidebar-signout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Sign out
+        </button>
+      </div>
     </aside>
 
     <!-- ============================================================
@@ -1598,6 +1702,22 @@
             <span class="badge badge-neutral"><span class="badge-dot"></span>Inactive</span>
             <span class="badge badge-neutral"><span class="badge-dot"></span>Draft</span>
           </div>
+
+          <h3 class="subsection-title">Category Badges and Integration Chips</h3>
+          <p class="section-description">
+            Category badges label which product a record belongs to (square corners, teal). Integration chips show whether a data source is connected.
+          </p>
+          <div class="badge-row" style="margin-bottom: var(--space-4);">
+            <span class="badge-category">Site Intelligence</span>
+            <span class="badge-category">Revenue Insight</span>
+            <span class="badge-category">Connecting Point</span>
+          </div>
+          <div class="badge-row">
+            <span class="chip-integration is-connected">GSC</span>
+            <span class="chip-integration is-connected">GA4</span>
+            <span class="chip-integration is-disconnected">GSC</span>
+            <span class="chip-integration is-disconnected">GA4</span>
+          </div>
         </section>
 
         <hr class="divider">
@@ -1680,6 +1800,11 @@
               <div class="metric-label">Pipeline Value</div>
               <div class="metric-value">$1.2M</div>
               <div class="metric-change positive">+18.7% growth</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Needs Attention</div>
+              <div class="metric-value attention">21</div>
+              <div class="metric-change" style="color: var(--color-gray-500);">Missing connections or stale</div>
             </div>
           </div>
         </section>
@@ -1773,9 +1898,71 @@
           </div>
         </section>
 
+        <hr class="divider">
+
+        <!-- ==================== APP SHELL & NAV ==================== -->
+        <section class="section" id="shell">
+          <div class="section-overline">Patterns</div>
+          <h1 class="section-title">App Shell and Navigation</h1>
+          <p class="section-description">
+            The standard OTM tool is sidebar-first. The sidebar stacks a logo with product subtitle, a nav with collapsible groups, and a pinned user/account block with Sign out. These are the elements most often missed when a tool is rebuilt, so they are shown here in full. The complete, reusable implementation ships in <code class="code-inline">otm-components.css</code>.
+          </p>
+
+          <div style="display: flex; max-width: 280px; border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md);">
+            <aside style="width: 280px; background: var(--color-surface-navy); color: #fff; display: flex; flex-direction: column;">
+
+              <!-- Logo + product subtitle -->
+              <div style="padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--color-border-dark);">
+                <div style="font-size: 18px; font-weight: 700; letter-spacing: -0.02em;"><span style="color: var(--color-gold);">.</span>OTM</div>
+                <div style="font-size: 12px; color: var(--color-text-dark-muted); margin-top: 2px;">Venn Intelligence</div>
+              </div>
+
+              <!-- Nav -->
+              <div style="flex: 1; padding: var(--space-3);">
+                <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-dark-muted); padding: var(--space-2) var(--space-3);">Navigation</div>
+
+                <a href="#shell" style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; background: var(--color-surface-mid); border-left: 3px solid var(--color-gold);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  Home</a>
+
+                <a href="#shell" style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); color: var(--color-text-dark-muted); text-decoration: none; font-size: 14px; font-weight: 500; border-left: 3px solid transparent;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                  Clients</a>
+
+                <!-- Collapsible nav group (expanded) -->
+                <button type="button" aria-expanded="true" aria-controls="demo-settings-sub" style="width: 100%; display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); background: var(--color-surface-mid); border: none; color: #fff; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; text-align: left; margin-top: var(--space-1);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                  Settings
+                  <svg width="16" height="16" style="margin-left: auto; transform: rotate(180deg);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div id="demo-settings-sub" style="display: flex; flex-direction: column; padding: var(--space-1) 0 var(--space-1) var(--space-8);">
+                  <a href="#shell" style="padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); color: #fff; text-decoration: none; font-size: 13px; font-weight: 500;">Data Sources</a>
+                  <a href="#shell" style="padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); color: var(--color-text-dark-muted); text-decoration: none; font-size: 13px;">Automation</a>
+                  <a href="#shell" style="padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); color: var(--color-text-dark-muted); text-decoration: none; font-size: 13px;">API Documentation</a>
+                </div>
+              </div>
+
+              <!-- User / account block + Sign out -->
+              <div style="border-top: 1px solid var(--color-border-dark); padding: var(--space-4) var(--space-3);">
+                <div style="display: flex; align-items: center; gap: var(--space-3); padding: 0 var(--space-2) var(--space-3);">
+                  <div style="width: 32px; height: 32px; border-radius: 9999px; background: var(--color-surface-mid); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: #fff; flex-shrink: 0;">MK</div>
+                  <div style="min-width: 0;">
+                    <div style="font-size: 13px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Miles Kailburn</div>
+                    <div style="font-size: 12px; color: var(--color-text-dark-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">miles@meetotm.com</div>
+                  </div>
+                </div>
+                <button type="button" style="display: flex; align-items: center; gap: var(--space-2); width: 100%; padding: var(--space-2); border-radius: var(--radius-md); background: transparent; border: none; color: var(--color-text-dark-muted); font-family: inherit; font-size: 13px; cursor: pointer;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                  Sign out
+                </button>
+              </div>
+            </aside>
+          </div>
+        </section>
+
         <!-- ==================== FOOTER ==================== -->
         <footer class="footer">
-          OTM Internal Tool &middot; Brand Guidelines v1.0 &middot; February 2026
+          OTM Internal Tools &middot; Brand Guidelines v1.1 &middot; May 2026
         </footer>
 
       </div>
