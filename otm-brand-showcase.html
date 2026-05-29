@@ -35,10 +35,15 @@
       border-bottom: 1px solid var(--color-border-dark);
     }
     .sidebar-logo-mark {
-      font-weight: 700;
-      font-size: 20px;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 22px;
       letter-spacing: -0.02em;
       color: var(--color-white);
+      text-transform: lowercase;
+    }
+    .sidebar-logo-mark .dot {
+      color: var(--color-gold);
     }
     .sidebar-logo-sub {
       margin-left: var(--space-2);
@@ -706,10 +711,15 @@
       margin-bottom: var(--space-6);
     }
     .login-logo-text {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--color-navy);
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 900;
+      color: #3e5361;
       letter-spacing: -0.02em;
+      text-transform: lowercase;
+    }
+    .login-logo-text .dot {
+      color: var(--color-gold);
     }
     .login-card h2 {
       font-size: 20px;
@@ -818,7 +828,7 @@
          ============================================================ -->
     <aside class="sidebar">
       <div class="sidebar-logo">
-        <span class="sidebar-logo-mark">.OTM</span>
+        <span class="sidebar-logo-mark"><span class="dot">.</span>otm</span>
         <span class="sidebar-logo-sub">Brand Guide</span>
       </div>
 
@@ -1687,7 +1697,7 @@
           <div class="login-demo">
             <div class="login-card">
               <div class="login-logo">
-                <span class="login-logo-text">.OTM</span>
+                <span class="login-logo-text"><span class="dot">.</span>otm</span>
               </div>
               <h2>Welcome Back</h2>
               <p class="subtitle">Sign in to access this internal tool.</p>
